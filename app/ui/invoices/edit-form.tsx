@@ -10,6 +10,7 @@ import {
 import Link from 'next/link';
 import { Button } from '@/app/ui/button';
 import { updateInvoice } from '@/app/lib/actions';
+import { notFound } from 'next/navigation';
 
 export default function EditInvoiceForm({
   invoice,
@@ -18,8 +19,8 @@ export default function EditInvoiceForm({
   invoice: InvoiceForm;
   customers: CustomerField[];
 }) {
-  const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
-
+  const updateInvoiceWithId = updateInvoice.bind(null, invoice?.id);
+  if (!invoice) notFound();
   return (
     <form action={updateInvoiceWithId}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
